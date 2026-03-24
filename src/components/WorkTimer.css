@@ -1,0 +1,370 @@
+.work-timer {
+  background-color: #1e3a5f;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 100;
+  border: 1px solid #2a4a6f;
+}
+
+.work-timer.collapsed {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.timer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.timer-header h3 {
+  color: #fff;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.collapse-icon {
+  color: #666;
+  font-size: 9px;
+}
+
+.timer-mini-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timer-time-mini {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ff6b6b;
+}
+
+.timer-status-mini {
+  font-size: 10px;
+  color: #888;
+}
+
+.work-timer.collapsed .timer-controls-mini,
+.work-timer.collapsed .settings-panel,
+.work-timer.collapsed .timer-display,
+.work-timer.collapsed .timer-controls,
+.work-timer.collapsed .timer-stats,
+.work-timer.collapsed .timer-extras {
+  display: none;
+}
+
+.settings-panel {
+  background-color: #0d2844;
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.settings-panel label {
+  display: block;
+  margin-bottom: 4px;
+  color: #888;
+  font-size: 10px;
+}
+
+.settings-panel input {
+  width: 45px;
+  padding: 3px 5px;
+  margin-left: 5px;
+  background-color: #1e3a5f;
+  border: 1px solid #2a4a6f;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 11px;
+}
+
+.timer-controls-mini {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.timer-controls-mini .settings-btn {
+  background: none;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px 6px;
+}
+
+.timer-display {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0;
+}
+
+.timer-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #0d2844;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #2a4a6f;
+}
+
+.timer-circle.active {
+  border-color: #ff6b6b;
+}
+
+.timer-time {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.timer-status {
+  font-size: 9px;
+  color: #888;
+  margin-top: 2px;
+}
+
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.timer-controls button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.start-btn {
+  background-color: #ff6b6b;
+  color: #fff;
+}
+
+.pause-btn {
+  background-color: #f59e0b;
+  color: #fff;
+}
+
+.stop-btn {
+  background-color: #1e3a5f;
+  color: #888;
+}
+
+.timer-stats {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 8px;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-value {
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  color: #ff6b6b;
+}
+
+.stat-label {
+  font-size: 9px;
+  color: #666;
+}
+
+.timer-extras {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.timer-extras button {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 10px;
+  background-color: #0d2844;
+  color: #888;
+}
+
+.timer-extras button:hover {
+  background-color: #1e3a5f;
+  color: #fff;
+}
+
+.break-lock {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.break-lock-content {
+  text-align: center;
+}
+
+.break-lock-content h2 {
+  color: #fff;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.break-timer {
+  font-size: 48px;
+  font-weight: bold;
+  color: #ff6b6b;
+  margin-bottom: 20px;
+}
+
+.break-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.break-actions button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 11px;
+  background-color: #0d2844;
+  color: #fff;
+}
+
+.break-actions .skip-btn {
+  background-color: #10b981;
+}
+
+.pre-break-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.pre-break-content {
+  background-color: #1e3a5f;
+  padding: 25px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.pre-break-content h2 {
+  color: #fff;
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.pre-break-timer {
+  font-size: 32px;
+  font-weight: bold;
+  color: #f59e0b;
+  margin-bottom: 8px;
+}
+
+.pre-break-content p {
+  color: #666;
+  margin-bottom: 12px;
+  font-size: 11px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: #1e3a5f;
+  border-radius: 8px;
+  padding: 15px;
+  width: 250px;
+}
+
+.modal h3 {
+  color: #fff;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.modal label {
+  display: block;
+  color: #888;
+  font-size: 11px;
+  margin-bottom: 6px;
+}
+
+.modal input {
+  width: 100%;
+  padding: 6px;
+  background-color: #0d2844;
+  border: 1px solid #2a4a6f;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.modal-actions button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 11px;
+  background-color: #0d2844;
+  color: #888;
+}
+
+.report-content {
+  text-align: center;
+}
+
+.report-content p {
+  margin: 6px 0;
+  color: #888;
+  font-size: 12px;
+}
+
+.report-content strong {
+  color: #ff6b6b;
+}

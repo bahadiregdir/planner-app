@@ -1,0 +1,64 @@
+{
+  "name": "planner-app",
+  "version": "1.0.0",
+  "description": "Not ve Kanban Board Uygulaması",
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build && electron-builder",
+    "preview": "vite preview",
+    "electron:dev": "concurrently \"vite\" \"wait-on http://localhost:5173 && electron .\"",
+    "electron:build": "vite build && electron-builder"
+  },
+  "keywords": [
+    "electron",
+    "react",
+    "kanban",
+    "todo"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^8.2.2",
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1",
+    "electron-rebuild": "^3.2.9",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10",
+    "vite-plugin-electron": "^0.28.0",
+    "vite-plugin-electron-renderer": "^0.14.5",
+    "wait-on": "^7.2.0"
+  },
+  "dependencies": {
+    "better-sqlite3": "^9.2.2",
+    "electron-log": "^5.0.3",
+    "electron-updater": "^6.8.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.1"
+  },
+  "build": {
+    "appId": "com.planner.app",
+    "productName": "Planner",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*"
+    ],
+    "mac": {
+      "target": "dmg"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "bahadiregdir",
+        "repo": "planner-app"
+      }
+    ]
+  }
+}
