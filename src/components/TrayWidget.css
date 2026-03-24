@@ -68,6 +68,8 @@
 .tray-buttons {
   margin-top: 16px;
   -webkit-app-region: no-drag;
+  display: flex;
+  gap: 8px;
 }
 
 .tray-btn {
@@ -100,5 +102,16 @@
 .tray-btn.stop:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 20px rgba(100, 116, 139, 0.5);
+}
+
+.tray-btn.pause {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+}
+
+.tray-btn.pause:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
 }
 

@@ -35,6 +35,15 @@ export default function TrayWidget() {
     }
   };
 
+  const handlePause = () => {
+    if (window.electronAPI?.updateTrayState) {
+      window.electronAPI.updateTrayState({
+        ...timerState,
+        isPaused: !timerState.isPaused
+      });
+    }
+  };
+
   const handleStop = () => {
     if (window.electronAPI?.updateTrayState) {
       window.electronAPI.updateTrayState({
@@ -70,9 +79,14 @@ export default function TrayWidget() {
             ▶️ Başlat
           </button>
         ) : (
-          <button className="tray-btn stop" onClick={handleStop}>
-            ⏹️ Durdur
-          </button>
+          <>
+            <button className="tray-btn pause" onClick={handlePause}>
+              {timerState.isPaused ? '▶️ Devam' : '⏸️ Ara'}
+            </button>
+            <button className="tray-btn stop" onClick={handleStop}>
+              ⏹️ Bitir
+            </button>
+          </>
         )}
       </div>
     </div>
