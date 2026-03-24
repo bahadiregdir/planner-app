@@ -104,8 +104,12 @@ function createWindow() {
     },
   });
 
-  const port = process.env.VITE_DEV_SERVER_URL ? new URL(process.env.VITE_DEV_SERVER_URL).port : '5173';
-  win.loadURL(`http://localhost:${port}`);
+  if (process.env.VITE_DEV_SERVER_URL) {
+    const port = new URL(process.env.VITE_DEV_SERVER_URL).port;
+    win.loadURL(`http://localhost:${port}`);
+  } else {
+    win.loadFile(path.join(__dirname, '../dist/index.html'));
+  }
 
   win.on('resize', () => {
     if (win && !win.isDestroyed()) {
@@ -195,8 +199,12 @@ function showWidget() {
     },
   });
 
-  const port = process.env.VITE_DEV_SERVER_URL ? new URL(process.env.VITE_DEV_SERVER_URL).port : '5173';
-  widgetWindow.loadURL(`http://localhost:${port}/#/widget`);
+  if (process.env.VITE_DEV_SERVER_URL) {
+    const port = new URL(process.env.VITE_DEV_SERVER_URL).port;
+    widgetWindow.loadURL(`http://localhost:${port}/#/widget`);
+  } else {
+    widgetWindow.loadFile(path.join(__dirname, '../dist/index.html'), { hash: '/widget' });
+  }
 
   widgetWindow.once('ready-to-show', () => {
     const trayBounds = tray.getBounds();
@@ -553,8 +561,12 @@ function showBreakOverlay() {
       },
     });
     
-    const port = process.env.VITE_DEV_SERVER_URL ? new URL(process.env.VITE_DEV_SERVER_URL).port : '5173';
-    overlay.loadURL(`http://localhost:${port}/#/break-overlay`);
+    if (process.env.VITE_DEV_SERVER_URL) {
+      const port = new URL(process.env.VITE_DEV_SERVER_URL).port;
+      overlay.loadURL(`http://localhost:${port}/#/break-overlay`);
+    } else {
+      overlay.loadFile(path.join(__dirname, '../dist/index.html'), { hash: '/break-overlay' });
+    }
     overlay.setVisibleOnAllWorkspaces(true);
     
     overlay.once('ready-to-show', () => {
