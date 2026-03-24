@@ -24,6 +24,28 @@ export default function TrayWidget() {
     return `${m}:${s.toString().padStart(2, '0')}`;
   };
 
+  const handleStart = () => {
+    if (window.electronAPI?.updateTrayState) {
+      window.electronAPI.updateTrayState({
+        isWorking: true,
+        isBreak: false,
+        timeLeft: 25 * 60,
+        isPaused: false
+      });
+    }
+  };
+
+  const handleStop = () => {
+    if (window.electronAPI?.updateTrayState) {
+      window.electronAPI.updateTrayState({
+        isWorking: false,
+        isBreak: false,
+        timeLeft: 0,
+        isPaused: false
+      });
+    }
+  };
+
   return (
     <div className="tray-widget">
       <div className="tray-header">
@@ -40,6 +62,18 @@ export default function TrayWidget() {
            timerState.isPaused ? 'Duraklatıldı' : 
            timerState.isBreak ? 'Mola' : 'Çalışıyor'}
         </span>
+      </div>
+
+      <div className="tray-buttons">
+        {!timerState.isWorking ? (
+          <button className="tray-btn start" onClick={handleStart}>
+            ▶️ Başlat
+          </button>
+        ) : (
+          <button className="tray-btn stop" onClick={handleStop}>
+            ⏹️ Durdur
+          </button>
+        )}
       </div>
     </div>
   );

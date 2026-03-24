@@ -65,3 +65,40 @@
   margin-top: 8px;
 }
 
+.tray-buttons {
+  margin-top: 16px;
+  -webkit-app-region: no-drag;
+}
+
+.tray-btn {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tray-btn.start {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+}
+
+.tray-btn.start:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
+}
+
+.tray-btn.stop {
+  background: linear-gradient(135deg, #64748b, #475569);
+  color: white;
+  box-shadow: 0 4px 15px rgba(100, 116, 139, 0.4);
+}
+
+.tray-btn.stop:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(100, 116, 139, 0.5);
+}
+
