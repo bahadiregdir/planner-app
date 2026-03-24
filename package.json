@@ -1,6 +1,6 @@
 {
   "name": "planner-app",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Not ve Kanban Board Uygulaması",
   "main": "dist-electron/main.js",
   "scripts": {
