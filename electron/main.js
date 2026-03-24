@@ -11,6 +11,14 @@ autoUpdater.logger = log;
 autoUpdater.autoDownload = false;
 autoUpdater.autoInstallOnAppQuit = true;
 
+if (app.isPackaged) {
+  autoUpdater.setFeedURL({
+    provider: 'github',
+    owner: 'bahadiregdir',
+    repo: 'planner-app'
+  });
+}
+
 const dbPath = path.join(app.getPath('userData'), 'planner.db');
 let db;
 let win;
