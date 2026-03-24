@@ -509,7 +509,15 @@ ipcMain.handle('notification:show', (_, title, body) => {
 });
 
 ipcMain.handle('update:check', () => {
-  return autoUpdater.checkForUpdates();
+  try {
+    return autoUpdater.checkForUpdates().catch(err => {
+      log.error('Update check error:', err);
+      return { error: err.message };
+    });
+  } catch (err) {
+    log.error('Update check exception:', err);
+    return { error: err.message };
+  }
 });
 
 ipcMain.handle('update:download', () => {

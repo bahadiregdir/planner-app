@@ -54,12 +54,10 @@
     "mac": {
       "target": "dmg"
     },
-    "publish": [
-      {
-        "provider": "github",
-        "owner": "bahadiregdir",
-        "repo": "planner-app"
-      }
-    ]
+    "publish": {
+      "provider": "github",
+      "owner": "bahadiregdir",
+      "repo": "planner-app"
+    }
   }
 }

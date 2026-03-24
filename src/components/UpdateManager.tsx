@@ -18,6 +18,7 @@ export default function UpdateManager() {
     version: '',
     progress: 0,
   });
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
     if (window.electronAPI?.onUpdateAvailable) {
@@ -27,6 +28,7 @@ export default function UpdateManager() {
           available: true,
           version: info.version,
         }));
+        setError('');
       });
     }
 
@@ -53,10 +55,15 @@ export default function UpdateManager() {
 
   const handleCheckForUpdates = async () => {
     setUpdateState(prev => ({ ...prev, checking: true }));
+    setError('');
     try {
-      await window.electronAPI?.updateCheck?.();
+      const result = await window.electronAPI?.updateCheck?.();
+      if (result?.error) {
+        setError(String(result.error));
+      }
     } catch (err) {
       console.error('Update check failed:', err);
+      setError(String(err));
     }
     setUpdateState(prev => ({ ...prev, checking: false }));
   };
@@ -72,13 +79,20 @@ export default function UpdateManager() {
 
   if (!updateState.available && !updateState.downloaded) {
     return (
-      <button 
-        className="update-check-btn" 
-        onClick={handleCheckForUpdates}
-        disabled={updateState.checking}
-      >
-        {updateState.checking ? 'Kontrol ediliyor...' : '🔄 Güncelleme Kontrol Et'}
-      </button>
+      <div>
+        <button 
+          className="update-check-btn" 
+          onClick={handleCheckForUpdates}
+          disabled={updateState.checking}
+        >
+          {updateState.checking ? 'Kontrol ediliyor...' : '🔄 Güncelleme Kontrol Et'}
+        </button>
+        {error && (
+          <div style={{ fontSize: '11px', color: '#ef4444', marginTop: '8px' }}>
+            Hata: {error}
+          </div>
+        )}
+      </div>
     );
   }
 
