@@ -17,7 +17,7 @@ export default defineConfig({
           build: {
             outDir: 'dist-electron',
             rollupOptions: {
-              external: ['better-sqlite3', 'electron-log'],
+              external: ['electron-log', '@supabase/supabase-js'],
             },
           },
         },
