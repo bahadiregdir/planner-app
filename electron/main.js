@@ -367,11 +367,19 @@ ipcMain.handle('db:updateTodoStatus', async (_, data) => {
 // ─── Tags ─────────────────────────────────────────────────────────────────────
 
 ipcMain.handle('tags:getAll', async (_, projectId) => {
-  let query = supabase.from('tags').select('*').order('name', { ascending: true });
   if (projectId) {
-    query = query.or(`project_id.is.null,project_id.eq.${projectId}`);
+    // Use two explicit queries to avoid string interpolation in PostgREST filter
+    const [{ data: globalTags, error: e1 }, { data: projectTags, error: e2 }] = await Promise.all([
+      supabase.from('tags').select('*').is('project_id', null),
+      supabase.from('tags').select('*').eq('project_id', Number(projectId)),
+    ]);
+    if (e1) throw e1;
+    if (e2) throw e2;
+    const combined = [...(globalTags || []), ...(projectTags || [])];
+    combined.sort((a, b) => a.name.localeCompare(b.name));
+    return combined;
   }
-  const { data, error } = await query;
+  const { data, error } = await supabase.from('tags').select('*').order('name', { ascending: true });
   if (error) throw error;
   return data;
 });
@@ -765,14 +773,14 @@ ipcMain.handle('backup:import', async () => {
     const backup = JSON.parse(fs.readFileSync(result.filePaths[0], 'utf8'));
     if (!backup.data) return { success: false, error: 'Geçersiz yedek dosyası' };
 
-    // Clear all data
-    await supabase.from('todo_tags').delete().neq('todo_id', 0);
-    await supabase.from('subtasks').delete().neq('id', 0);
-    await supabase.from('todos').delete().neq('id', 0);
-    await supabase.from('tags').delete().neq('id', 0);
-    await supabase.from('project_sessions').delete().neq('id', 0);
-    await supabase.from('projects').delete().neq('id', 0);
-    await supabase.from('settings').delete().neq('key', '');
+    // Clear all data (gte(0) selects all rows since IDs are always positive integers)
+    await supabase.from('todo_tags').delete().gte('todo_id', 0);
+    await supabase.from('subtasks').delete().gte('id', 0);
+    await supabase.from('todos').delete().gte('id', 0);
+    await supabase.from('tags').delete().gte('id', 0);
+    await supabase.from('project_sessions').delete().gte('id', 0);
+    await supabase.from('projects').delete().gte('id', 0);
+    await supabase.from('settings').delete().gte('key', '');
 
     // Restore data
     if (backup.data.projects?.length) await supabase.from('projects').insert(backup.data.projects);
